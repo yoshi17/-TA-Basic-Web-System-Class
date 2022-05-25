@@ -222,9 +222,8 @@ public class PokerModel {
 		count = new int[13];
 		for (int c: handcards) {
 			int x = (c-1)%13;
-			if (x == 0 || x == 9 || x == 10 || x == 11 || x ==12) {
-				isRoyal = true;
-			} else {
+			if (x != 0 || x != 9 || x != 10 || x != 11 || x != 12) {
+				System.out.println(x);
 				isRoyal = false;
 			}
 			count[x]++;
