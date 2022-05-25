@@ -1,6 +1,7 @@
 package poker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +15,9 @@ public class PokerModel {
 	int four;
 	boolean isStraight;
 	boolean isRoyal;
+	
+	/*ロイヤルストレートフラッシュ*/
+	List<Integer> royal = Arrays.asList(0, 9, 10, 11, 12);
 	
 	/*山札*/
 	List<Integer> deckcards;
@@ -36,6 +40,8 @@ public class PokerModel {
 	}
 	/** 一連のゲームを開始する */
 	public void reset() {
+		isStraight = true;
+		isRoyal = true;
 		games = 0;
 		chips = 500;
 	}
@@ -87,7 +93,7 @@ public class PokerModel {
 		int clover = countClover();
 		int point = 0;
 		if (spade == 5 || heart == 5 || diamond == 5 || clover == 5) {
-			if (isRoyal) {
+			if (isRoyal == true) {
 				message = "ロイヤルストレートフラッシュ";
 				point = 900;
 			} else if (isStraight == false) {
@@ -222,8 +228,7 @@ public class PokerModel {
 		count = new int[13];
 		for (int c: handcards) {
 			int x = (c-1)%13;
-			if (x != 0 || x != 9 || x != 10 || x != 11 || x != 12) {
-				System.out.println(x);
+			if (royal.contains(x) == false) {
 				isRoyal = false;
 			}
 			count[x]++;
